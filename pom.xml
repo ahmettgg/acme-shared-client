@@ -8,7 +8,7 @@
 
   <groupId>com.acme</groupId>
   <artifactId>acme-shared-client</artifactId>
-  <version>1.0.0-dev</version>
+  <version>1.0.0-dev-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>ACME Shared Client</name>
 
@@ -76,6 +76,10 @@
           <id>codeartifact</id>
           <url>${env.CODEARTIFACT_MAVEN_URL}</url>
         </repository>
+        <snapshotRepository>
+    <id>codeartifact</id>
+    <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+  </snapshotRepository>
       </distributionManagement>
     </profile>
   </profiles>
