@@ -11,15 +11,4 @@
       <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
     </server>
   </servers>
-
-  <!-- Maven Central'ı CodeArtifact üzerinden mirror et -->
-  <mirrors>
-    <mirror>
-      <id>codeartifact-mirror</id>
-      <name>CodeArtifact Proxy</name>
-      <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-      <mirrorOf>*</mirrorOf>
-    </mirror>
-  </mirrors>
-
 </settings>
