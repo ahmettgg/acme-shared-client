@@ -45,7 +45,7 @@
     <profile>
       <id>dev</id>
       <properties>
-        <revision>1.0.0-dev-12</revision>
+        <revision>1.0.0-dev-SNAPSHOT</revision>
       </properties>
 
       <repositories>
