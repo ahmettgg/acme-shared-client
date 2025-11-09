@@ -8,12 +8,15 @@
 
   <groupId>com.acme</groupId>
   <artifactId>acme-shared-client</artifactId>
-  <version>1.0.0-dev-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>jar</packaging>
   <name>ACME Shared Client</name>
 
   <properties>
-    <!-- Uygun Java sürümünü buraya yaz (localde 17 kullanıyorsan 17) -->
+    <!-- default revision (fallback) - dev snapshot -->
+    <revision>1.0.0-dev-SNAPSHOT</revision>
+
+    <!-- Java derleyici hedefi (localde Java11 kullanıyorsan 11) -->
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,10 +30,26 @@
     </dependency>
   </dependencies>
 
-  <!-- dev/prod profilleri: CI workflow tarafından CODEARTIFACT_MAVEN_URL environment ile doldurulacak -->
+  <!-- distributionManagement: release + snapshot hedefleri -->
+  <distributionManagement>
+    <repository>
+      <id>codeartifact</id>
+      <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+    </repository>
+    <snapshotRepository>
+      <id>codeartifact</id>
+      <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <profiles>
     <profile>
       <id>dev</id>
+
+      <properties>
+        <!-- dev profilinde default olarak SNAPSHOT kullan -->
+        <revision>1.0.0-dev-SNAPSHOT</revision>
+      </properties>
 
       <repositories>
         <repository>
@@ -45,18 +64,12 @@
           <url>${env.CODEARTIFACT_MAVEN_URL}</url>
         </pluginRepository>
       </pluginRepositories>
-
-      <distributionManagement>
-        <repository>
-          <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-        </repository>
-      </distributionManagement>
     </profile>
 
     <profile>
       <id>prod</id>
 
+      <!-- prod profili ön tanımlı revision bırakmıyor; CI'de -Drevision=1.0.0 şeklinde verilecek -->
       <repositories>
         <repository>
           <id>codeartifact</id>
@@ -70,17 +83,6 @@
           <url>${env.CODEARTIFACT_MAVEN_URL}</url>
         </pluginRepository>
       </pluginRepositories>
-
-      <distributionManagement>
-        <repository>
-          <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-        </repository>
-        <snapshotRepository>
-    <id>codeartifact</id>
-    <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-  </snapshotRepository>
-      </distributionManagement>
     </profile>
   </profiles>
 
