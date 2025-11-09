@@ -13,10 +13,9 @@
   <name>ACME Shared Client</name>
 
   <properties>
-    <!-- default revision (fallback) - dev snapshot -->
+    <!-- fallback (kullanılmazsa) -->
     <revision>1.0.0-dev-SNAPSHOT</revision>
 
-    <!-- Java derleyici hedefi (localde Java11 kullanıyorsan 11) -->
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,7 +29,7 @@
     </dependency>
   </dependencies>
 
-  <!-- distributionManagement: release + snapshot hedefleri -->
+  <!-- Tek distributionManagement (release + snapshot hedefleri) -->
   <distributionManagement>
     <repository>
       <id>codeartifact</id>
@@ -45,9 +44,7 @@
   <profiles>
     <profile>
       <id>dev</id>
-
       <properties>
-        <!-- dev profilinde default olarak SNAPSHOT kullan -->
         <revision>1.0.0-dev-SNAPSHOT</revision>
       </properties>
 
@@ -68,8 +65,7 @@
 
     <profile>
       <id>prod</id>
-
-      <!-- prod profili ön tanımlı revision bırakmıyor; CI'de -Drevision=1.0.0 şeklinde verilecek -->
+      <!-- prod: CI tarafında -Drevision=1.0.0 verilecek -->
       <repositories>
         <repository>
           <id>codeartifact</id>
@@ -88,7 +84,6 @@
 
   <build>
     <plugins>
-      <!-- modern maven-compiler-plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
