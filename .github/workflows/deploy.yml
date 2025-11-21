@@ -47,4 +47,4 @@ jobs:
         run: echo "Using CODEARTIFACT_MAVEN_URL=${CODEARTIFACT_MAVEN_URL}"
 
       - name: Deploy with Maven (DEV)
-        run: mvn -B -Pdev -s settings.xml deploy -DskipTests
+        run: mvn -B -Pprod -s settings.xml deploy -DskipTests
