@@ -10,13 +10,13 @@
   <groupId>com.acme</groupId>
   <artifactId>acme-shared-client</artifactId>
   <!-- Versiyon her zaman revision üzerinden gelecek -->
-  <version>${revision}</version>
+  <version>1.0.6</version>
   <packaging>jar</packaging>
   <name>ACME Shared Client</name>
 
   <properties>
     <!-- PROD varsayılan versiyon: developer burayı değiştirir (1.0.0 -> 1.0.1 vs.) -->
-    <revision>1.0.1</revision>
+
 
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -36,10 +36,8 @@
     <!-- DEV: sabit snapshot, hep üstüne yazar -->
     <profile>
       <id>dev</id>
-
-      <properties>
-        <revision>1.0.0-dev-SNAPSHOT</revision>
-      </properties>
+<version> ${project.version}-SNAPSHOT </version>
+    
 
       <distributionManagement>
         <repository>
