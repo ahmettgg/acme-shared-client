@@ -46,4 +46,4 @@ jobs:
           echo "CODEARTIFACT_AUTH_TOKEN=$TOKEN" >> $GITHUB_ENV
 
       - name: Deploy with Maven (DEV)
-        run: mvn -B -Pprod -s settings.xml deploy -DskipTests
+        run: mvn -B -Pdev -s settings.xml deploy -DskipTests
