@@ -38,7 +38,7 @@
       <id>dev</id>
 
       <properties>
-        <revision>1.0.0-dev-SNAPSHOT</revision>
+        <revision>${revision}-SNAPSHOT</revision>
       </properties>
 
       <distributionManagement>
