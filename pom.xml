@@ -6,15 +6,17 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Uygulama kimliği -->
   <groupId>com.acme</groupId>
   <artifactId>acme-shared-client</artifactId>
+  <!-- Versiyon her zaman revision üzerinden gelecek -->
   <version>${revision}</version>
   <packaging>jar</packaging>
   <name>ACME Shared Client</name>
 
   <properties>
-    <!-- fallback (kullanılmazsa) -->
-    <revision>1.0.0-dev-SNAPSHOT</revision>
+    <!-- PROD varsayılan versiyon: developer burayı değiştirir (1.0.0 -> 1.0.1 vs.) -->
+    <revision>1.0.0</revision>
 
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -29,25 +31,27 @@
     </dependency>
   </dependencies>
 
-  <!-- Tek distributionManagement (release + snapshot hedefleri) -->
-  <distributionManagement>
-    <repository>
-      <id>codeartifact</id>
-      <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-    </repository>
-    <snapshotRepository>
-      <id>codeartifact</id>
-      <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-    </snapshotRepository>
-  </distributionManagement>
-
   <profiles>
+
+    <!-- DEV: sabit snapshot, hep üstüne yazar -->
     <profile>
       <id>dev</id>
+
       <properties>
         <revision>1.0.0-dev-SNAPSHOT</revision>
       </properties>
 
+      <distributionManagement>
+        <repository>
+          <id>codeartifact</id>
+          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+        </repository>
+        <snapshotRepository>
+          <id>codeartifact</id>
+          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+        </snapshotRepository>
+      </distributionManagement>
+
       <repositories>
         <repository>
           <id>codeartifact</id>
@@ -63,9 +67,18 @@
       </pluginRepositories>
     </profile>
 
+    <!-- PROD: versiyon yukarıdaki <revision> içinden gelir -->
     <profile>
       <id>prod</id>
-      <!-- prod: CI tarafında -Drevision=1.0.0 verilecek -->
+      <!-- prod: yeni release'te sadece <revision> değerini değiştiriyorsun -->
+
+      <distributionManagement>
+        <repository>
+          <id>codeartifact</id>
+          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+        </repository>
+      </distributionManagement>
+
       <repositories>
         <repository>
           <id>codeartifact</id>
@@ -80,6 +93,7 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
+
   </profiles>
 
   <build>
