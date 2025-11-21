@@ -52,19 +52,7 @@
         </snapshotRepository>
       </distributionManagement>
 
-      <repositories>
-        <repository>
-          <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-        </repository>
-      </repositories>
-
-      <pluginRepositories>
-        <pluginRepository>
-          <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
-        </pluginRepository>
-      </pluginRepositories>
+      
     </profile>
 
     <!-- PROD: versiyon yukarıdaki <revision> içinden gelir -->
