@@ -22,29 +22,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Get repository endpoint (maven) for DEV
-        id: endpoint
-        run: |
-          ENDPOINT=$(aws codeartifact get-repository-endpoint \
-            --domain acme-domain \
-            --repository ${REPO_NAME} \
-            --format maven \
-            --region ${AWS_REGION} \
-            --query repositoryEndpoint --output text)
-          echo "CODEARTIFACT_MAVEN_URL=${ENDPOINT}" >> $GITHUB_ENV
-
-      - name: Get CodeArtifact auth token (DEV)
-        id: token
-        run: |
-          TOKEN=$(aws codeartifact get-authorization-token \
-            --domain acme-domain \
-            --domain-owner ${{ secrets.DEV_AWS_ACCOUNT_ID }} \
-            --region ${AWS_REGION} \
-            --query authorizationToken --output text)
-          echo "CODEARTIFACT_AUTH_TOKEN=$TOKEN" >> $GITHUB_ENV
+      - name: Configure CodeArtifact for DEV
+        uses: aws-actions/configure-codeartifact@v1
+        with:
+          domain: acme-domain
+          domain-owner: ${{ secrets.DEV_AWS_ACCOUNT_ID }}
+          repository: ${{ env.REPO_NAME }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Debug (masked) - show endpoint
         run: echo "Using CODEARTIFACT_MAVEN_URL=${CODEARTIFACT_MAVEN_URL}"
 
       - name: Deploy with Maven (DEV)
-        run: mvn -B -Pprod -s settings.xml deploy -DskipTests
+        run: mvn -B -Pdev -s settings.xml deploy -DskipTests
