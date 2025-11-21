@@ -16,7 +16,7 @@
 
   <properties>
     <!-- PROD varsayılan versiyon: developer burayı değiştirir (1.0.0 -> 1.0.1 vs.) -->
-    <releaseRevision>1.0.0</releaseRevision>
+    <releaseRevision>2.0.0</releaseRevision>
          <revision>${releaseRevision}</revision>
 
     <maven.compiler.source>11</maven.compiler.source>
