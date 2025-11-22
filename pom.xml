@@ -45,25 +45,29 @@
       <distributionManagement>
         <repository>
           <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+          <url>https://acme-domain-638946561387.d.codeartifact.eu-west-1.amazonaws.com/maven/acme-maven-dev/
+</url>
         </repository>
         <snapshotRepository>
           <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+          <url>https://acme-domain-638946561387.d.codeartifact.eu-west-1.amazonaws.com/maven/acme-maven-dev/
+</url>
         </snapshotRepository>
       </distributionManagement>
 
       <repositories>
         <repository>
           <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+          <url>https://acme-domain-638946561387.d.codeartifact.eu-west-1.amazonaws.com/maven/acme-maven-dev/
+</url>
         </repository>
       </repositories>
 
       <pluginRepositories>
         <pluginRepository>
           <id>codeartifact</id>
-          <url>${env.CODEARTIFACT_MAVEN_URL}</url>
+          <url>https://acme-domain-638946561387.d.codeartifact.eu-west-1.amazonaws.com/maven/acme-maven-dev/
+</url>
         </pluginRepository>
       </pluginRepositories>
     </profile>
