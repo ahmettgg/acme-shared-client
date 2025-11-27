@@ -27,7 +27,7 @@ jobs:
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::213855680807:role/DP-CodeArtifact-OIDC-Dev
+          role-to-assume: arn:aws:iam::638946561387:role/codeartifact-github
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Who am I? (debug)
