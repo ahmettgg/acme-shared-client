@@ -46,4 +46,4 @@ jobs:
       - name: Deploy with Maven (DEV)
         run: |
           mvn -B -s settings.xml versions:use-releases -DgenerateBackupPoms=false
-          mvn -B -Pdev -s settings.xml deploy -DskipTests
+          mvn -B -Pprod -s settings.xml deploy -DskipTests
