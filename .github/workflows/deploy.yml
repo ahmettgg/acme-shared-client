@@ -43,8 +43,20 @@ jobs:
             --query authorizationToken --output text)
           echo "CODEARTIFACT_AUTH_TOKEN=$TOKEN" >> $GITHUB_ENV
 
-      - name: Deploy with Maven (DEV)
+      - name: Set release version (NO COMMIT)
         run: |
-          mvn -B -s settings.xml versions:use-releases -DgenerateBackupPoms=false -Pprod && \
+          mvn -B -s settings.xml versions:set \
+          -DremoveSnapshot \
+          -DgenerateBackupPoms=false
+
+      - name: Show version (debug)
+        run: |
+          mvn -q -s settings.xml help:evaluate \
+          -Dexpression=project.version -DforceStdout
+          echo
+
+      - name: Deploy release to CodeArtifact (PROD)
+        run: |
           mvn -B -Pprod -s settings.xml deploy -DskipTests
+
 
